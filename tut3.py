@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 '''
-This script demonstrates programming an FPGA, configuring a wideband spectrometer and plotting the received data using the Python KATCP library along with the katcp_wrapper distributed in the corr package. Designed for use with TUT3 at the 2009 CASPER workshop.\n
-
-You need to have KATCP and CORR installed. Get them from http://pypi.python.org/pypi/katcp and http://casper.berkeley.edu/svn/trunk/projects/packetized_correlator/corr-0.4.0/
-
-\nAuthor: Jason Manley, November 2009.
+Online Digitizer and Analyzer for
+Project8: Towards measuring the mass of neutrino.
+Author:Prajwal Mohanmurthy
+       prajwal@mohanmurthy.com
+       LNS MIT
+Adapted from Tutorial3 script (Jason Manley).
 '''
-
-#TODO: add support for ADC histogram plotting.
-#TODO: add support for determining ADC input level 
 
 import corr,time,numpy,struct,sys,logging,pylab,matplotlib
 

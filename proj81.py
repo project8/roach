@@ -10,8 +10,8 @@ Adapted from Tutorial3 script (Jason Manley).
 
 import corr,time,numpy,struct,sys,logging,pylab,matplotlib
 
-bitstream = 'proj83.bof'
-katcp_port = 7147
+bitstream = 'proj81.bof'
+katcp_port=7147
 
 def exit_fail():
     print 'FAILURE DETECTED. Log entries:\n',lh.printMessages()
@@ -28,22 +28,17 @@ def exit_clean():
     exit()
 
 def get_data():
-	#get the data...    
-	acc_n = fpga.read_uint('acc_cnt') 
-    	a_0=struct.unpack('>1024l',fpga.read('one',1024*4,0))
-    	a_1=struct.unpack('>1024l',fpga.read('two',1024*4,0))
-    	a_2=struct.unpack('>1024l',fpga.read('three',1024*4,0))
-    	a_3=struct.unpack('>1024l',fpga.read('four',1024*4,0))
+    #get the data...    
+    acc_n = fpga.read_uint('acc_cnt')
+    a_0=struct.unpack('>1024l',fpga.read('even',1024*4,0))
+    a_1=struct.unpack('>1024l',fpga.read('odd',1024*4,0))
 
-    	interleave_a=[]
+    interleave_a=[]
 
-    	for i in range(1024):
-        	interleave_a.append(a_0[i])
-        	interleave_a.append(a_1[i])
-		interleave_a.append(a_2[i])
-		interleave_a.append(a_3[i])
-
-    	return acc_n, interleave_a 
+    for i in range(1024):
+        interleave_a.append(a_0[i])
+        interleave_a.append(a_1[i])
+    return acc_n, interleave_a 
 
 def plot_spectrum():
     matplotlib.pyplot.clf()
@@ -59,6 +54,7 @@ def plot_spectrum():
     matplotlib.pylab.xlim(0,2048)
     fig.canvas.draw()
     fig.canvas.manager.window.after(100, plot_spectrum)
+
 
 #START OF MAIN:
 
@@ -143,3 +139,4 @@ except:
     exit_fail()
 
 exit_clean()
+
